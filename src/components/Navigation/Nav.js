@@ -1,28 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import {Link} from "react-router-dom";
+import {styleLogo, styleNavLink} from "../../css/Nav.style";
 import logo from '../../img/logo.svg';
 
 const Nav = () => {
     const [show, setShow] = useState(false);
+    const ref = useRef()
 
+    useEffect(() => {
+        const checkIfClickedOutside = e => {
+            // Check If the menu is open and the clicked target is not within the menu, then close the menu
+            if (show && ref.current && !ref.current.contains(e.target)) {
+                setShow(false)
+            }
+        }
+        document.addEventListener("mousedown", checkIfClickedOutside)
+        return () => {
+            // Remove event listener
+            document.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+    }, [show])
+
+    //Handle mobile menu button
     const handleMobile = ()=>{
         setShow(prevCheck => !prevCheck)
     }
 
-
     return (
-        <nav className="navbar navbar-expand-lg bg-primary">
+        <nav ref={ref} className="navbar navbar-expand-lg bg-primary shadow justify-content-between">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#"> <img className='logo' src={logo}/> </a>
+                <Link to="/" style={styleLogo}>
+                    <img className='logo' src={logo}/>
+                </Link>
                 <button className="navbar-toggler" type="button" onClick={handleMobile}>
-                    <i className="fa-solid fa-bars c-white"></i>
+                    <i className="fa-solid fa-bars c-white"> </i>
                 </button>
                 <div className={`${show ? ' ': 'collapse'} navbar-collapse`}>
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Search users</a>
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item ">
+                            <Link to="/users" style={styleNavLink}>users</Link>
                         </li>
+                        <div className="vr bg-white d-none d-lg-block"> </div>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Search repositories </a>
+                            <Link to="/repositories" style={styleNavLink}>repositories</Link>
                         </li>
                     </ul>
                 </div>
