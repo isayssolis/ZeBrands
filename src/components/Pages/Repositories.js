@@ -1,8 +1,8 @@
 import React from "react";
 
-const Repositories = ()=>{
+const Repositories = () => {
     return(
-        <div className="container mt-5">
+        <div className="container mt-5 fade-in">
             <div className="row">
                 Repositories
 

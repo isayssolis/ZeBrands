@@ -37,7 +37,11 @@ const Nav = () => {
                 </button>
                 <div className={`${show ? ' ': 'collapse'} navbar-collapse`}>
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item ">
+                        <li className="nav-item">
+                            <Link to="/" style={styleNavLink}>Home</Link>
+                        </li>
+                        <div className="vr bg-white d-none d-lg-block"> </div>
+                        <li className="nav-item">
                             <Link to="/users" style={styleNavLink}>users</Link>
                         </li>
                         <div className="vr bg-white d-none d-lg-block"> </div>
