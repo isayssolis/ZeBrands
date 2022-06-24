@@ -30,7 +30,7 @@ const Table = ({ columns, data }) => {
         <>
             <div className='table-responsive'>
                 <table className='table table-striped table-hover' {...getTableProps()}>
-                    <thead className='dark'>
+                    <thead>
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (

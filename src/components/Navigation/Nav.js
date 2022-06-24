@@ -27,7 +27,7 @@ const Nav = () => {
     }
 
     return (
-        <nav ref={ref} className="navbar navbar-expand-lg bg-primary shadow justify-content-between">
+        <nav ref={ref} className="navbar navbar-expand-lg bg-primary shadow justify-content-between bg-zebrands">
             <div className="container-fluid">
                 <NavLink to="/" style={styleLogo}>
                     <img className='logo' src={logo}/>

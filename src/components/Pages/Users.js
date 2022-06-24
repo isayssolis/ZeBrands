@@ -1,12 +1,15 @@
-import React,{useMemo, useState, useEffect}from "react";
+import React,{useMemo, useState, useEffect, useContext}from "react";
 import Table from "../Generic/Table";
 import {getAllUsers} from "../Services";
-import {Link} from "react-router-dom";
+import {UserValuesContext} from "../../context/UserContext";
+import {useNavigate} from "react-router-dom";
 
 const Users = () => {
     //Set state for users array or axios error
     const [users, setUsers] = useState([]);
     const [axiosError, setAxiosError] = useState(null);
+    const [context, setContext] = useContext(UserValuesContext);
+    const navigate = useNavigate();
     //API call set Users or catch error
     useEffect(() => {
         getAllUsers().then((resp)=>{
@@ -16,6 +19,12 @@ const Users = () => {
             console.log(e.message)
         })
     }, []);
+
+    //Check Repo. from user and pass profile image ref.
+    const handleCheckRepos = (avatar, name) => {
+        setContext({avatar, name});
+        navigate(`/repositories/${name}`);
+    }
 
     //Define columns values
     const columns = useMemo(
@@ -50,9 +59,10 @@ const Users = () => {
                         Header: 'Repositories',
                         accessor: null,
                         Cell: tableProps => (
-                            <Link to={`/repositories/${tableProps.row.original.login}`}>
+                            <a href='#' onClick={
+                                ()=>handleCheckRepos(tableProps.row.original.avatar_url, tableProps.row.original.login)}>
                                 Repositories <i className="fa-solid fa-up-right-from-square"> </i>
-                            </Link>
+                            </a>
                         )
                     },
                 ],
@@ -83,8 +93,8 @@ const Users = () => {
             <div className="row">
                 <div className="col-sm-12">
                     <div className="card">
-                        <div className="card-header">
-                            <p className='my-title'>GitHub Users</p>
+                        <div className="card-header bg-zebrands">
+                            <p className='my-title text-light'>GitHub Users</p>
                         </div>
                         <div className="card-body">
                             {renderTable()}

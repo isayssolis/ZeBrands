@@ -1,12 +1,14 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import {getAllRepos} from "../Services";
 import {Link, useParams} from "react-router-dom";
 import Table from "../Generic/Table";
+import {UserValuesContext} from "../../context/UserContext";
 
 const Repositories = () => {
     let { user } = useParams();
     const [repos, setRepos] = useState([]);
     const [axiosError, setAxiosError] = useState(null);
+    const [context, setContext] = useContext(UserValuesContext);
 
     useEffect(() => {
         if(user){
@@ -30,7 +32,7 @@ const Repositories = () => {
                 Header: ' ',
                 columns: [
                     {
-                        Header: 'Repository ID',
+                        Header: 'ID',
                         accessor: 'id',
                     },
                     {
@@ -76,17 +78,20 @@ const Repositories = () => {
             <div className="row">
                 <div className="col-sm-12">
                     <div className="card">
-                        <div className="card-header">
+                        <div className="card-header bg-zebrands">
                             <div className="row">
                                 <div className='col'>
-                                    <p className='my-title'>GitHub repositories for user: <b className='text-capitalize'>{user} </b></p>
+                                    <h4 className="d-inline-block float-star my-title text-light mt-1">GitHub repositories</h4>
+                                    <Link to='/users' className="btn btn-sm btn-primary text-uppercase float-end" type="button">
+                                        <i className="fa-solid fa-angle-left"> </i> Back
+                                    </Link>
                                 </div>
-                                <div className='col'>
-                                    <div className="d-grid d-md-flex justify-content-md-end">
-                                        <Link to='/users' className="btn btn-sm btn-primary text-uppercase" type="button">
-                                            <i className="fa-solid fa-angle-left"> </i> Go back to users
-                                        </Link>
-                                    </div>
+                                <div className="col-12 text-center mt-2">
+                                    <img src={context.avatar}
+                                         className='rounded-circle imgShadow'
+                                         width={90} alt="user avatar"/>
+                                    <hr className='text-light'/>
+                                    <h5 className='text-capitalize text-light' >{user}</h5>
                                 </div>
                             </div>
                         </div>
