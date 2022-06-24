@@ -30,7 +30,7 @@ const Nav = () => {
         <nav ref={ref} className="navbar navbar-expand-lg bg-primary shadow justify-content-between bg-zebrands">
             <div className="container-fluid">
                 <NavLink to="/" style={styleLogo}>
-                    <img className='logo' src={logo}/>
+                    <img className='logo' src={logo} alt='logo'/>
                 </NavLink>
                 <button className="navbar-toggler" type="button" onClick={handleMobile}>
                     <i className="fa-solid fa-bars c-white"> </i>

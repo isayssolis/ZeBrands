@@ -7,7 +7,7 @@ import Repositories from "./components/Pages/Repositories";
 import NotFound from "./components/Pages/NotFound";
 import {UserValuesContext} from "./context/UserContext";
 
-export default  () => {
+const App = () => {
     const [context, setContext] = useState({});
     return (
         <UserValuesContext.Provider value={[context, setContext]}>
@@ -25,3 +25,5 @@ export default  () => {
         </UserValuesContext.Provider>
     );
 }
+
+export default App
