@@ -1,17 +1,19 @@
 import React,{useMemo, useState, useEffect}from "react";
 import Table from "../Generic/Table";
 import {getAllUsers} from "../Services";
+import {Link} from "react-router-dom";
 
 const Users = () => {
     //Set state for users array or axios error
     const [users, setUsers] = useState([]);
-    const [axiosError, setAxiosError] = useState('');
+    const [axiosError, setAxiosError] = useState(null);
     //API call set Users or catch error
     useEffect(() => {
         getAllUsers().then((resp)=>{
             setUsers(resp.data)
         }).catch((e)=>{
             setAxiosError(e.message)
+            console.log(e.message)
         })
     }, []);
 
@@ -40,14 +42,17 @@ const Users = () => {
                     {
                         Header: 'User Login',
                         accessor: 'login',
+                        Cell: tableProps => (
+                            <span className='text-capitalize' >{tableProps.row.original.login}</span>
+                        )
                     },
                     {
-                        Header: 'GitHub Profile',
-                        accessor: 'html_url',
+                        Header: 'Repositories',
+                        accessor: null,
                         Cell: tableProps => (
-                            <a target='_blank' href={tableProps.row.original.html_url}>
-                                <i className="fa-solid fa-up-right-from-square"> </i>
-                            </a>
+                            <Link to={`/repositories/${tableProps.row.original.login}`}>
+                                Repositories <i className="fa-solid fa-up-right-from-square"> </i>
+                            </Link>
                         )
                     },
                 ],
@@ -61,12 +66,14 @@ const Users = () => {
         if(axiosError){
             return <div className="alert alert-danger" role="alert">Something went wrong, please try again!</div>
         }
-        if(users){
+        if(users.length > 0){
             return <Table columns={columns} data={users} />
         }
         else return (
-            <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
+            <div className='text-center'>
+                <div className="spinner-border text-primary" role="status"> </div>
+                <br/>
+                <span><small>Loading...</small></span>
             </div>
         )
     }
@@ -77,7 +84,7 @@ const Users = () => {
                 <div className="col-sm-12">
                     <div className="card">
                         <div className="card-header">
-                            GitHub Users
+                            <p className='my-title'>GitHub Users</p>
                         </div>
                         <div className="card-body">
                             {renderTable()}

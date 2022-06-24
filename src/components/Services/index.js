@@ -5,3 +5,4 @@ export const GITHUB = axios.create({
 });
 
 export * from './users';
+export * from './repos';

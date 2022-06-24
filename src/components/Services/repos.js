@@ -1,8 +1,8 @@
 import {GITHUB} from './index';
 //Use axios instance and apply for ASYNC call.
-export const getAllUsers = async () => {
+export const getAllRepos = async (user) => {
     const response = await GITHUB.get(
-        `users?since=1&per_page=100`
+        `/users/${user}/repos`
     );
     return response;
 };

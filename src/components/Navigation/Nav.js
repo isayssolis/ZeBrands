@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {styleLogo, styleNavLink} from "../../css/Nav.style";
 import logo from '../../img/logo.svg';
 
@@ -29,24 +29,20 @@ const Nav = () => {
     return (
         <nav ref={ref} className="navbar navbar-expand-lg bg-primary shadow justify-content-between">
             <div className="container-fluid">
-                <Link to="/" style={styleLogo}>
+                <NavLink to="/" style={styleLogo}>
                     <img className='logo' src={logo}/>
-                </Link>
+                </NavLink>
                 <button className="navbar-toggler" type="button" onClick={handleMobile}>
                     <i className="fa-solid fa-bars c-white"> </i>
                 </button>
                 <div className={`${show ? ' ': 'collapse'} navbar-collapse`}>
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <Link to="/" style={styleNavLink}>Home</Link>
+                            <NavLink to="/" style={styleNavLink}>Home</NavLink>
                         </li>
                         <div className="vr bg-white d-none d-lg-block"> </div>
                         <li className="nav-item">
-                            <Link to="/users" style={styleNavLink}>users</Link>
-                        </li>
-                        <div className="vr bg-white d-none d-lg-block"> </div>
-                        <li className="nav-item">
-                            <Link to="/repositories" style={styleNavLink}>repositories</Link>
+                            <NavLink to="/users" style={styleNavLink}>users</NavLink>
                         </li>
                     </ul>
                 </div>

@@ -7,9 +7,11 @@
 }
 body{color:var(--text-color) !important;}
 table td { vertical-align: middle}
-.logo{width: 100%; height: 22px}
+.logo{width: 100%; height: 40px}
 .c-white{color: #FFFFFF}
 .bg-white{background-color:#FFFFFF}
+.my-title{font-size: 1.2rem; text-transform: none; font-weight: normal}
+.dark{background-color: var(--first-color) !important; color:#FFFFFF;}
 /*Overrides*/
 .bg-primary{background-color: var(--first-color) !important}
 .nav-link{color: #FFFFFF;

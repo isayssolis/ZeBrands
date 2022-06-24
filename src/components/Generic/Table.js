@@ -28,31 +28,31 @@ const Table = ({ columns, data }) => {
     // Render the Table
     return (
         <>
-        <div className='table-responsive'>
-            <table className='table table-striped table-hover' {...getTableProps()}>
-                <thead className='table-dark'>
-                {headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map(column => (
-                            <th className='text-center' style={{padding: '0 .5rem', borderWidth: '0'}} {...column.getHeaderProps()}>{column.render('Header')}</th>
-                        ))}
-                    </tr>
-                ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                {page.map((row, i) => {
-                    prepareRow(row)
-                    return (
-                        <tr className='text-center' {...row.getRowProps()}>
-                            {row.cells.map(cell => {
-                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                            })}
+            <div className='table-responsive'>
+                <table className='table table-striped table-hover' {...getTableProps()}>
+                    <thead className='dark'>
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map(column => (
+                                <th style={{padding: '0 .5rem', borderWidth: '0'}} {...column.getHeaderProps()}>{column.render('Header')}</th>
+                            ))}
                         </tr>
-                    )
-                })}
-                </tbody>
-            </table>
-        </div>
+                    ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                    {page.map((row, i) => {
+                        prepareRow(row)
+                        return (
+                            <tr style={{verticalAlign: 'middle'}} {...row.getRowProps()}>
+                                {row.cells.map(cell => {
+                                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                })}
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
+            </div>
             <div className="row">
                 <div className="col-sm-3">
                     <button className='btn btn-sm btn-primary'onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
@@ -91,7 +91,7 @@ const Table = ({ columns, data }) => {
                     </select>
                 </div>
             </div>
-    </>
+        </>
     )
 }
 
